@@ -1,0 +1,871 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>[Adınız Soyadınız] - Gelişmiş Dijital Portföy</title>
+    <!-- Google Fonts (Poppins) -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+
+    <style>
+        /* --- CSS Değişkenleri (Yumuşatılmış Neon Tema) --- */
+        :root {
+            --dark-bg: #0f0f24; /* Biraz daha az mavi, koyu mor/gri */
+            --dark-bg-secondary: #1c1c3a; /* Paneller için */
+            --panel-bg: rgba(28, 28, 58, 0.6); /* Yarı şeffaf panel */
+            /* Yumuşatılmış Neon Renkler */
+            --neon-pink: #f470b9; /* Daha yumuşak pembe */
+            --neon-cyan: #60d5e8; /* Daha az parlak turkuaz */
+            --neon-purple: #a560e8; /* Daha yumuşak mor */
+            --light-text: #e0e0ff; /* Hafif maviye çalan beyaz */
+            --muted-text: #a0a0c0; /* Gri/Mavi tonlu soluk metin */
+            /* Daha Hafif Glow Efektleri */
+            --glow-cyan-subtle: 0 0 3px rgba(96, 213, 232, 0.5), 0 0 6px rgba(96, 213, 232, 0.3);
+            --glow-pink-subtle: 0 0 3px rgba(244, 112, 185, 0.5), 0 0 6px rgba(244, 112, 185, 0.3);
+            --glow-purple-subtle: 0 0 3px rgba(165, 96, 232, 0.5), 0 0 6px rgba(165, 96, 232, 0.3);
+            --box-shadow-glow-cyan: 0 0 8px rgba(96, 213, 232, 0.3), 0 0 15px rgba(96, 213, 232, 0.15);
+            --box-shadow-glow-pink: 0 0 8px rgba(244, 112, 185, 0.3), 0 0 15px rgba(244, 112, 185, 0.15);
+            --box-shadow-glow-purple: 0 0 8px rgba(165, 96, 232, 0.3), 0 0 15px rgba(165, 96, 232, 0.15);
+            --border-radius: 10px; /* Biraz daha yuvarlak */
+            --transition-speed: 0.3s;
+            --container-width: 1140px;
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; scroll-behavior: smooth; }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            line-height: 1.7;
+            background-color: var(--dark-bg);
+            color: var(--light-text);
+            overflow-x: hidden;
+            /* Daha ince ve koyu grid */
+            background-image: linear-gradient(rgba(96, 213, 232, 0.03) 1px, transparent 1px),
+                              linear-gradient(90deg, rgba(96, 213, 232, 0.03) 1px, transparent 1px);
+            background-size: 40px 40px;
+        }
+
+        .container { max-width: var(--container-width); margin: auto; padding: 0 20px; }
+
+        h1, h2, h3, h4 { font-weight: 600; margin-bottom: 1rem; letter-spacing: 0.5px; }
+
+        h1 {
+            font-size: 3.8rem; /* Biraz daha büyük */
+            color: #fff;
+            /* Ana başlıkta hala güçlü ama kontrollü glow */
+            text-shadow: 0 0 8px var(--neon-cyan), 0 0 15px rgba(96, 213, 232, 0.5);
+        }
+        h2 {
+            font-size: 2.6rem;
+            color: var(--neon-pink);
+            text-shadow: var(--glow-pink-subtle);
+            text-align: center;
+            margin-bottom: 3.5rem; /* Daha fazla boşluk */
+            position: relative;
+        }
+        h2::after { /* Daha ince ve zarif çizgi */
+            content: ''; position: absolute; bottom: -12px; left: 50%;
+            transform: translateX(-50%); width: 80px; height: 2px;
+            background: var(--neon-pink); box-shadow: var(--glow-pink-subtle);
+            border-radius: 1px;
+        }
+
+        h3 { font-size: 1.7rem; color: var(--neon-cyan); text-shadow: var(--glow-cyan-subtle); margin-bottom: 1.5rem;}
+        h4 { font-size: 1.15rem; color: var(--neon-purple); text-shadow: var(--glow-purple-subtle); margin-bottom: 0.8rem;}
+
+        p { margin-bottom: 1.2rem; font-size: 1rem; color: var(--muted-text); font-weight: 300; }
+        section p, section li { color: var(--light-text); } /* Bölüm içi metinler daha okunaklı */
+
+        a { text-decoration: none; color: var(--neon-cyan); transition: color var(--transition-speed) ease, text-shadow var(--transition-speed) ease; }
+        a:hover { color: #fff; text-shadow: 0 0 5px var(--neon-cyan); }
+
+        section { padding: 90px 0; position: relative; border-bottom: 1px solid rgba(96, 213, 232, 0.08); overflow: hidden; }
+        section:last-of-type { border-bottom: none; }
+
+        /* --- Yumuşatılmış Neon Buton --- */
+        .btn {
+            display: inline-block; padding: 13px 30px; font-size: 0.95rem;
+            font-weight: 600; letter-spacing: 0.8px; color: var(--neon-cyan);
+            background: transparent; border: 2px solid var(--neon-cyan);
+            border-radius: 50px; cursor: pointer; text-transform: uppercase;
+            text-shadow: none; /* Başlangıçta gölge yok */
+            box-shadow: inset 0 0 8px rgba(96, 213, 232, 0.2);
+            transition: all var(--transition-speed) ease; position: relative; overflow: hidden;
+        }
+        .btn:hover {
+            color: var(--dark-bg); background-color: var(--neon-cyan);
+            /* Daha kontrollü hover glow */
+            box-shadow: 0 0 10px rgba(96, 213, 232, 0.6), 0 0 15px rgba(96, 213, 232, 0.3);
+            transform: translateY(-2px);
+        }
+         .btn:active { transform: translateY(0); box-shadow: inset 0 0 10px rgba(0,0,0,0.3); }
+
+        .btn-secondary { /* Pembe Buton */
+            color: var(--neon-pink); border-color: var(--neon-pink);
+            box-shadow: inset 0 0 8px rgba(244, 112, 185, 0.2);
+        }
+        .btn-secondary:hover {
+            color: var(--dark-bg); background-color: var(--neon-pink);
+            box-shadow: 0 0 10px rgba(244, 112, 185, 0.6), 0 0 15px rgba(244, 112, 185, 0.3);
+        }
+         .btn i { margin-left: 8px; font-size: 0.9em; } /* Buton içi ikon */
+         .btn-icon-left i { margin-right: 8px; margin-left: 0;} /* Sola ikonlu buton */
+
+        /* --- Genel Panel Stili --- */
+        .panel {
+            background-color: var(--panel-bg);
+            padding: 30px;
+            border-radius: var(--border-radius);
+            border: 1px solid rgba(96, 213, 232, 0.15);
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+             backdrop-filter: blur(8px);
+             transition: border-color var(--transition-speed) ease, box-shadow var(--transition-speed) ease;
+        }
+        .panel:hover {
+             border-color: rgba(96, 213, 232, 0.3);
+             box-shadow: var(--box-shadow-glow-cyan), 0 6px 20px rgba(0, 0, 0, 0.3);
+        }
+
+
+        /* --- Header ve Navbar --- */
+        #main-header {
+            position: fixed; top: 0; left: 0; width: 100%; z-index: 1000;
+            background-color: rgba(15, 15, 36, 0.8); /* Daha az şeffaf */
+            backdrop-filter: blur(12px);
+            border-bottom: 1px solid rgba(165, 96, 232, 0.15); /* Mor çizgi */
+            box-shadow: 0 1px 10px rgba(165, 96, 232, 0.1);
+            transition: top 0.3s ease-in-out, background-color 0.3s ease;
+        }
+        #main-header.hidden { top: -100px; }
+
+        #navbar { display: flex; justify-content: space-between; align-items: center; padding: 12px 0; }
+        #navbar .logo {
+            font-size: 1.6rem; font-weight: 700; color: #fff;
+            text-shadow: var(--glow-cyan-subtle); letter-spacing: 1px; padding-left: 20px;
+        }
+        #navbar .logo span { color: var(--neon-cyan); }
+
+        #navbar ul { list-style: none; display: flex; align-items: center; padding-right: 20px; }
+        #navbar ul li { margin-left: 28px; }
+        #navbar ul li a {
+            color: var(--muted-text); padding: 8px 5px; /* Daha az padding */
+            font-weight: 600; font-size: 0.9rem; text-transform: uppercase;
+            letter-spacing: 0.8px; border-radius: 4px; position: relative;
+            transition: color var(--transition-speed) ease, text-shadow var(--transition-speed) ease;
+        }
+        #navbar ul li a:hover, #navbar ul li a.active { color: var(--neon-cyan); text-shadow: var(--glow-cyan-subtle); }
+        #navbar ul li a.active::after { /* Daha ince aktif çizgi */
+            content: ''; position: absolute; bottom: -6px; left: 0; width: 100%; height: 2px;
+            background: var(--neon-cyan); box-shadow: var(--glow-cyan-subtle);
+            animation: nav-glow 2s infinite alternate ease-in-out;
+        }
+        @keyframes nav-glow {
+            from { box-shadow: 0 0 2px var(--neon-cyan); opacity: 0.7; }
+            to { box-shadow: 0 0 5px var(--neon-cyan); opacity: 1; }
+        }
+
+        /* Mobil Menü Butonu */
+        .menu-toggle { display: none; cursor: pointer; background: none; border: none; padding: 10px; }
+        .menu-toggle .bar { display: block; width: 26px; height: 3px; margin: 5px auto; background-color: var(--light-text); border-radius: 2px; transition: all 0.3s ease-in-out; box-shadow: 0 0 2px rgba(96, 213, 232, 0.3); }
+        .menu-toggle.active .bar:nth-child(1) { transform: translateY(8px) rotate(45deg); background-color: var(--neon-pink); box-shadow: var(--glow-pink-subtle);}
+        .menu-toggle.active .bar:nth-child(2) { opacity: 0; }
+        .menu-toggle.active .bar:nth-child(3) { transform: translateY(-8px) rotate(-45deg); background-color: var(--neon-pink); box-shadow: var(--glow-pink-subtle);}
+
+        /* --- Hero Section --- */
+        #hero {
+            padding-top: 160px; padding-bottom: 140px; min-height: 100vh;
+            display: flex; flex-direction: column; justify-content: center; align-items: center; text-align: center;
+            background: linear-gradient(180deg, rgba(15, 15, 36, 0) 0%, var(--dark-bg) 85%), /* Üstten gradyan */
+                        radial-gradient(ellipse at 70% 110%, rgba(165, 96, 232, 0.2) 0%, rgba(15, 15, 36, 0) 60%); /* Alttan mor ışık */
+            position: relative; border-bottom: none; overflow: visible; /* Allow potential overflow effects */
+        }
+        #hero h1 { animation: fadeInDown 1s ease-out 0.2s backwards; }
+        #hero .subtitle {
+            font-size: 1.4rem; color: var(--muted-text); margin: 1rem auto 2.5rem auto; font-weight: 300; max-width: 650px;
+            animation: fadeInUp 1s ease-out 0.5s backwards;
+        }
+        #hero .hero-buttons { animation: fadeInUp 1s ease-out 0.8s backwards; }
+        #hero .btn { margin: 0 10px; }
+        #hero .hero-socials { margin-top: 3rem; animation: fadeInUp 1s ease-out 1s backwards; }
+        #hero .hero-socials a {
+            color: var(--muted-text); margin: 0 15px; font-size: 1.6rem;
+            transition: color 0.3s ease, transform 0.3s ease;
+        }
+         #hero .hero-socials a:hover { color: var(--neon-purple); transform: scale(1.2); }
+
+        /* --- Animasyon Keyframes --- */
+        @keyframes fadeInDown { from { opacity: 0; transform: translateY(-30px); } to { opacity: 1; transform: translateY(0); } }
+        @keyframes fadeInUp { from { opacity: 0; transform: translateY(30px); } to { opacity: 1; transform: translateY(0); } }
+
+
+        /* --- About Section --- */
+        #about .container { display: grid; grid-template-columns: 0.8fr 1.2fr; gap: 60px; align-items: center; }
+        #about .about-image img {
+            width: 100%; max-width: 380px; display: block; margin: 0 auto;
+            border-radius: var(--border-radius);
+            border: 2px solid var(--neon-purple); padding: 6px; background-color: rgba(15, 15, 36, 0.5);
+            box-shadow: var(--box-shadow-glow-purple), 0 5px 20px rgba(0,0,0,0.3);
+        }
+        #about .about-content { /* Panel stilini kullanıyor */ }
+
+
+        /* --- Services Section (YENİ) --- */
+        #services { background-color: var(--dark-bg-secondary); }
+        .services-grid {
+            display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 35px;
+        }
+        .service-item {
+            background-color: var(--panel-bg); padding: 30px 25px;
+            border-radius: var(--border-radius); text-align: center;
+            border: 1px solid rgba(165, 96, 232, 0.2); /* Mor sınır */
+            box-shadow: 0 3px 10px rgba(0, 0, 0, 0.2);
+            transition: transform var(--transition-speed) ease, box-shadow var(--transition-speed) ease, border-color var(--transition-speed) ease;
+            backdrop-filter: blur(5px);
+        }
+        .service-item:hover {
+            transform: translateY(-8px);
+            box-shadow: var(--box-shadow-glow-purple);
+            border-color: rgba(165, 96, 232, 0.4);
+        }
+        .service-item i {
+            font-size: 2.8rem; margin-bottom: 1.5rem; color: var(--neon-purple);
+            text-shadow: var(--glow-purple-subtle); display: block;
+        }
+        .service-item h4 { color: var(--light-text); font-size: 1.2rem; margin-bottom: 1rem; text-shadow: none;}
+        .service-item p { font-size: 0.95rem; color: var(--muted-text); margin-bottom: 0; }
+
+
+        /* --- Skills Section --- */
+        .skills-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(190px, 1fr)); gap: 30px; }
+        .skill-item { /* Panel stilini kullanıyor */
+            text-align: center; padding: 25px;
+            border-color: rgba(244, 112, 185, 0.15); /* Pembe sınır */
+        }
+        .skill-item:hover { border-color: rgba(244, 112, 185, 0.4); box-shadow: var(--box-shadow-glow-pink); transform: translateY(-5px);}
+        .skill-item i { font-size: 2.8rem; margin-bottom: 1rem; color: var(--neon-pink); text-shadow: var(--glow-pink-subtle); display: block; }
+        .skill-item h4 { font-size: 1.1rem; margin-bottom: 0.5rem; color: var(--light-text); text-shadow: none; }
+        .skill-item p { display: none; /* Daha temiz görünüm için açıklamayı gizleyelim veya hover'da gösterelim */ }
+
+
+        /* --- Experience Section (Timeline) --- */
+        .timeline { position: relative; max-width: 850px; margin: 0 auto; padding: 40px 0; }
+        .timeline::after { /* Zaman çizgisi */
+            content: ''; position: absolute; width: 2px; background-color: var(--neon-cyan);
+            box-shadow: var(--glow-cyan-subtle); top: 0; bottom: 0; left: 50%; margin-left: -1px; border-radius: 1px; opacity: 0.6;
+        }
+        .timeline-item { padding: 10px 40px; position: relative; background-color: inherit; width: 50%; margin-bottom: 40px; }
+        .timeline-item::after { /* Noktalar */
+            content: ''; position: absolute; width: 16px; height: 16px; right: -9px;
+            background-color: var(--dark-bg-secondary); border: 2px solid var(--neon-cyan);
+            top: 20px; border-radius: 50%; z-index: 1; box-shadow: var(--glow-cyan-subtle);
+            transition: transform 0.3s ease, background-color 0.3s ease;
+        }
+        .timeline-item:hover::after { transform: scale(1.3); background-color: var(--neon-cyan); }
+        .timeline-item.left { left: 0; }
+        .timeline-item.right { left: 50%; }
+        .timeline-item.right::after { left: -9px; }
+        .timeline-content { /* Panel stilini kullanıyor */ padding: 25px; border-color: rgba(96, 213, 232, 0.2); }
+         .timeline-item:hover .timeline-content { box-shadow: var(--box-shadow-glow-cyan); border-color: rgba(96, 213, 232, 0.4); }
+        .timeline-content h4 { margin-top: 0; font-size: 1.25rem; color: var(--light-text); text-shadow: none; }
+        .timeline-date { font-size: 0.9rem; font-weight: 600; color: var(--neon-cyan); margin-bottom: 10px; display: block; text-shadow: var(--glow-cyan-subtle); }
+        .timeline-company { font-weight: 600; color: var(--muted-text); display: block; margin-top: -8px; margin-bottom: 10px; font-size: 0.95rem; }
+        .timeline-content p { color: var(--muted-text); font-size: 0.95rem; }
+
+
+        /* --- Projects Section --- */
+        #projects { background-color: var(--dark-bg-secondary); }
+        .projects-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(310px, 1fr)); gap: 40px; }
+        .project-card { /* Panel stilini kullanıyor ama daha koyu */
+            background-color: #15152e; /* Daha koyu kart */
+            overflow: hidden; display: flex; flex-direction: column; position: relative;
+            border-color: rgba(244, 112, 185, 0.1); /* Pembe sınır */
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+        }
+        .project-card:hover { transform: translateY(-8px); box-shadow: var(--box-shadow-glow-pink), 0 8px 25px rgba(0,0,0,0.4); border-color: rgba(244, 112, 185, 0.3); }
+        .project-card .img-container { overflow: hidden; position: relative; border-bottom: 2px solid rgba(244, 112, 185, 0.2); }
+        .project-card img { display: block; width: 100%; height: 210px; object-fit: cover; transition: transform 0.5s ease, filter 0.5s ease; filter: grayscale(30%) brightness(0.9); /* Hafif soluk başlangıç */ }
+        .project-card:hover img { transform: scale(1.05); filter: grayscale(0%) brightness(1); }
+        .project-card-content { padding: 25px; flex-grow: 1; display: flex; flex-direction: column; justify-content: space-between; }
+        .project-card-content h3 { color: var(--neon-pink); margin-bottom: 10px; text-shadow: var(--glow-pink-subtle); }
+        .project-tags { margin: 12px 0; }
+        .project-tags span {
+            display: inline-block; background-color: rgba(244, 112, 185, 0.1); color: var(--neon-pink);
+            padding: 4px 10px; border-radius: 4px; font-size: 0.75rem; font-weight: 600;
+            margin-right: 5px; margin-bottom: 5px; border: 1px solid rgba(244, 112, 185, 0.2);
+            text-transform: uppercase; letter-spacing: 0.5px;
+        }
+        .project-links { margin-top: 20px; }
+
+
+        /* --- Testimonials Section (YENİ) --- */
+        .testimonial-grid {
+            display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 30px;
+        }
+        .testimonial-item { /* Panel stilini kullanıyor */
+            padding: 25px;
+            border-color: rgba(165, 96, 232, 0.2); /* Mor sınır */
+        }
+         .testimonial-item:hover { border-color: rgba(165, 96, 232, 0.4); box-shadow: var(--box-shadow-glow-purple); }
+        .testimonial-item blockquote {
+            font-style: italic; color: var(--muted-text); margin-bottom: 1rem;
+            border-left: 3px solid var(--neon-purple); padding-left: 15px; font-size: 0.95rem;
+        }
+        .testimonial-author { text-align: right; }
+        .testimonial-author cite {
+            font-weight: 600; color: var(--light-text); font-style: normal; display: block;
+        }
+        .testimonial-author span { font-size: 0.85rem; color: var(--neon-purple); }
+
+
+         /* --- Call to Action Section (YENİ) --- */
+         #cta {
+             background: linear-gradient(45deg, rgba(165, 96, 232, 0.15), rgba(96, 213, 232, 0.15)), var(--dark-bg-secondary);
+             text-align: center;
+             padding: 60px 0;
+             border-bottom: none;
+         }
+         #cta h2 { color: var(--light-text); text-shadow: none; font-size: 2.2rem; margin-bottom: 1.5rem; }
+         #cta p { max-width: 600px; margin: 0 auto 2rem auto; color: var(--muted-text); }
+         #cta .btn { margin: 0 10px; }
+
+
+        /* --- Contact Section --- */
+        #contact form { /* Panel stilini kullanıyor */
+            max-width: 750px; margin: 30px auto 0 auto; padding: 40px;
+            border-color: rgba(96, 213, 232, 0.2);
+        }
+         #contact form:hover { box-shadow: var(--box-shadow-glow-cyan); border-color: rgba(96, 213, 232, 0.4); }
+        #contact .form-group { margin-bottom: 25px; }
+        #contact label { display: block; margin-bottom: 8px; font-weight: 600; color: var(--muted-text); font-size: 0.85rem; text-transform: uppercase; letter-spacing: 1px; }
+        #contact label i { margin-right: 8px; color: var(--neon-cyan); text-shadow: var(--glow-cyan-subtle); }
+        #contact input[type="text"],
+        #contact input[type="email"],
+        #contact input[type="text"], /* Önceki subject selector yerine */
+        #contact textarea {
+            width: 100%; padding: 14px; font-size: 1rem; font-family: 'Poppins', sans-serif;
+            background-color: rgba(15, 15, 36, 0.7); border: 1px solid rgba(96, 213, 232, 0.25);
+            border-radius: 6px; color: var(--light-text); caret-color: var(--neon-cyan);
+            transition: border-color var(--transition-speed) ease, box-shadow var(--transition-speed) ease;
+        }
+        #contact input:-webkit-autofill, /* Tarayıcı otomatik doldurma stillerini düzeltme */
+        #contact textarea:-webkit-autofill {
+            -webkit-box-shadow: 0 0 0 30px var(--dark-bg) inset !important;
+            -webkit-text-fill-color: var(--light-text) !important;
+             border-color: rgba(96, 213, 232, 0.25) !important;
+        }
+        #contact input[type="text"]:focus,
+        #contact input[type="email"]:focus,
+        #contact input[type="text"]:focus,
+        #contact textarea:focus {
+            outline: none; border-color: var(--neon-cyan);
+            box-shadow: 0 0 8px rgba(96, 213, 232, 0.3), inset 0 0 3px rgba(96, 213, 232, 0.1);
+        }
+        #contact textarea { height: 150px; resize: vertical; }
+        #contact button[type="submit"] { width: 100%; padding: 15px; font-size: 1.05rem; margin-top: 10px; }
+
+        /* --- Footer --- */
+        #main-footer {
+            padding: 50px 0 30px 0; margin-top: 0; /* CTA sonrası margin yok */
+            background-color: #0a0a18; color: var(--muted-text); text-align: center;
+            border-top: 1px solid rgba(165, 96, 232, 0.15);
+        }
+        #main-footer .footer-content {
+             display: flex; flex-direction: column; align-items: center;
+        }
+         #main-footer .footer-logo { /* Opsiyonel logo veya isim */
+             font-size: 1.4rem; font-weight: 700; color: #fff;
+            text-shadow: var(--glow-cyan-subtle); letter-spacing: 1px; margin-bottom: 1rem;
+         }
+         #main-footer .footer-logo span { color: var(--neon-cyan); }
+
+        #main-footer .social-links { margin-bottom: 1.5rem; }
+        #main-footer .social-links a { color: var(--muted-text); margin: 0 12px; font-size: 1.7rem; transition: all var(--transition-speed) ease; }
+        #main-footer .social-links a:hover { color: var(--neon-purple); transform: scale(1.15) translateY(-2px); text-shadow: var(--glow-purple-subtle); }
+        #main-footer p { margin-top: 0; font-size: 0.9rem; }
+        #main-footer p a { color: var(--neon-cyan); }
+        #main-footer p a:hover { color: #fff; }
+
+
+        /* --- Animasyonlar (Scroll Reveal) --- */
+        .reveal { opacity: 0; transform: translateY(40px); transition: opacity 0.8s ease-out, transform 0.6s ease-out; }
+        .reveal.visible { opacity: 1; transform: translateY(0); }
+        /* Gecikmeler */
+        .reveal-delay-1 { transition-delay: 0.1s; } .reveal-delay-2 { transition-delay: 0.2s; }
+        .reveal-delay-3 { transition-delay: 0.3s; } .reveal-delay-4 { transition-delay: 0.4s; }
+        .reveal-delay-5 { transition-delay: 0.5s; }
+
+        /* --- Duyarlılık (Responsive) --- */
+        @media (max-width: 1200px) { .container { max-width: 960px; } }
+        @media (max-width: 992px) {
+            .container { max-width: 720px; }
+            h1 { font-size: 3rem; } #hero h1 { font-size: 3.2rem; }
+            h2 { font-size: 2.2rem; margin-bottom: 3rem; }
+            #about .container { grid-template-columns: 1fr; text-align: center; gap: 40px; }
+            #about .about-image { margin-bottom: 20px; max-width: 320px; }
+            .services-grid { grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); }
+        }
+        @media (max-width: 768px) {
+             body { background-size: 50px 50px; } /* Mobil grid daha büyük */
+             section { padding: 70px 0; }
+             h1 { font-size: 2.6rem; } #hero h1 { font-size: 2.8rem; }
+             #hero .subtitle { font-size: 1.2rem; } h2 { font-size: 2rem; }
+             #navbar { padding: 10px 0; } #navbar .logo { padding-left: 20px; font-size: 1.4rem; }
+             #navbar ul {
+                 display: none; flex-direction: column; width: 100%; position: absolute;
+                 top: 100%; left: 0; background-color: rgba(15, 15, 36, 0.95); backdrop-filter: blur(10px);
+                 padding: 15px 0; border-top: 1px solid rgba(165, 96, 232, 0.15);
+             }
+             #navbar ul.active { display: flex; }
+             #navbar ul li { margin: 10px 20px; width: calc(100% - 40px); text-align: center; }
+             #navbar ul li a.active::after { display: none; }
+             .menu-toggle { display: block; position: absolute; top: 10px; right: 20px; z-index: 1001;}
+             .timeline::after { left: 25px; }
+             .timeline-item { width: 100%; padding-left: 60px; padding-right: 15px; margin-bottom: 35px; }
+             .timeline-item.left, .timeline-item.right { left: 0%; }
+             .timeline-item.left::after, .timeline-item.right::after { left: 15px; width: 14px; height: 14px; top: 22px; }
+             .projects-grid, .testimonial-grid { grid-template-columns: 1fr; }
+             #cta h2 { font-size: 1.8rem; } #cta p { font-size: 0.95rem; }
+             #contact form { padding: 30px 20px; }
+        }
+        @media (max-width: 576px) {
+             section { padding: 60px 0; }
+             h1 { font-size: 2.2rem; } #hero h1 { font-size: 2.5rem; }
+             #hero .subtitle { font-size: 1.1rem; }
+             .btn { padding: 11px 25px; font-size: 0.85rem; }
+             #hero .hero-buttons { display: flex; flex-direction: column; align-items: center; gap: 15px; }
+             .skills-grid { grid-template-columns: repeat(auto-fit, minmax(120px, 1fr)); gap: 20px; }
+             .skill-item { padding: 20px 10px; } .skill-item i { font-size: 2.2rem; }
+             #main-footer .social-links a { margin: 0 10px; font-size: 1.5rem; }
+        }
+
+    </style>
+</head>
+<body>
+
+    <!-- Header / Navbar -->
+    <header id="main-header">
+        <div class="container">
+            <nav id="navbar">
+                <a href="#hero" class="logo">[Hoş<span>geldiniz]</span></a>
+                <button class="menu-toggle" id="mobile-menu" aria-label="Menüyü Aç/Kapat" aria-expanded="false">
+                    <span class="bar"></span> <span class="bar"></span> <span class="bar"></span>
+                </button>
+                <ul class="nav-links" id="nav-links">
+                    <li><a href="#hero" class="active">Başlangıç</a></li>
+                    <li><a href="#about">Hakkımda</a></li>
+                    <li><a href="#services">Hizmetler</a></li>
+                    <li><a href="#skills">Yetenekler</a></li>
+                    <li><a href="#experience">Deneyim</a></li>
+                    <li><a href="#projects">Projeler</a></li>
+                    <li><a href="#testimonials">Referanslar</a></li>
+                    <li><a href="#contact">İletişim</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <main>
+        <!-- Hero Section -->
+        <section id="hero">
+            <div class="container">
+                <h1 class="reveal">[Adil Oğuz]</h1>
+                <p class="subtitle reveal">[Mobil uygulama Geliştiricisi / Web Geliitirici | Yenilikçi Web Çözümleri]</p>
+                <div class="hero-buttons reveal">
+                    <a href="#projects" class="btn btn-icon-left"><i class="fas fa-briefcase"></i>Projelerime Göz At</a>
+                    <a href="#contact" class="btn btn-secondary btn-icon-left"><i class="fas fa-comments"></i>İletişime Geç</a>
+                </div>
+                <div class="hero-socials reveal">
+                    <a href="[LinkedIn Profil Linkiniz]" target="_blank" aria-label="LinkedIn"><i class="fab fa-linkedin"></i></a>
+                    <a href="[GitHub Profil Linkiniz]" target="_blank" aria-label="GitHub"><i class="fab fa-github"></i></a>
+                    <a href="[Twitter Profil Linkiniz]" target="_blank" aria-label="Twitter"><i class="fab fa-twitter"></i></a>
+                    <a href="[Codepen Profil Linkiniz]" target="_blank" aria-label="Codepen"><i class="fab fa-codepen"></i></a>
+                </div>
+            </div>
+        </section>
+
+        <!-- About Section -->
+        <section id="about">
+            <div class="container">
+                <div class="about-image reveal">
+                    <img src="profile.jpg" alt="[Adınız Soyadınız]">
+                </div>
+                <div class="about-content panel reveal reveal-delay-1">
+                    <h2>Hakkımda // Dijital Yolculuk</h2>
+                    <p>
+                       Merhaba! Ben Adil, teknolojiye ve tasarıma tutkuyla bağlı bir Mobil Uygulama ve Web Geliştiriciyim / UI/UX Tasarımcısıyım]. Amacım, karmaşık problemleri basit, zarif ve kullanıcı dostu dijital çözümlere dönüştürmek. Kod yazarken estetiği, performansı ve erişilebilirliği ön planda tutuyorum.
+                    </p>
+                   
+                     <a href="/path/to/cv.pdf" target="_blank" class="btn">CV Görüntüle <i class="fas fa-download"></i></a> 
+                </div>
+            </div>
+        </section>
+
+        <!-- Services Section (YENİ) -->
+        <section id="services">
+            <div class="container">
+                <h2 class="reveal">Sunduğum Hizmetler</h2>
+                <div class="services-grid">
+                    <div class="service-item reveal">
+                        <i class="fas fa-code"></i>
+                        <h4>Özel Web Geliştirme</h4>
+                        <p>İhtiyaçlarınıza özel, modern ve performanslı web siteleri ve web uygulamaları geliştiriyorum.</p>
+                    </div>
+                    <div class="service-item reveal reveal-delay-1">
+                        <i class="fas fa-mobile-alt"></i>
+                        <h4>Duyarlı Arayüz Tasarımı (UI)</h4>
+                        <p>Tüm cihazlarda (mobil, tablet, masaüstü) kusursuz görünen, estetik ve kullanıcı dostu arayüzler tasarlıyorum.</p>
+                    </div>
+                    <div class="service-item reveal reveal-delay-2">
+                         <i class="fas fa-lightbulb"></i>
+                        <h4>Kullanıcı Deneyimi (UX) Danışmanlığı</h4>
+                        <p>Mevcut veya yeni projeleriniz için kullanıcı akışlarını analiz ediyor, iyileştirme önerileri sunuyorum.</p>
+                    </div>
+                     <div class="service-item reveal reveal-delay-3">
+                        <i class="fas fa-rocket"></i>
+                        <h4>Performans Optimizasyonu</h4>
+                        <p>Web sitenizin hızını ve verimliliğini artırarak kullanıcı memnuniyetini ve arama motoru sıralamasını iyileştiriyorum.</p>
+                    </div>
+                     <div class="service-item reveal reveal-delay-4">
+                        <i class="fas fa-server"></i>
+                        <h4>API Geliştirme & Entegrasyon</h4>
+                        <p>Uygulamalarınızın birbirleriyle veya üçüncü parti servislerle konuşmasını sağlayan API'ler geliştiriyorum.</p>
+                    </div>
+                     <div class="service-item reveal reveal-delay-5">
+                        <i class="fas fa-headset"></i>
+                        <h4>Teknik Destek & Bakım</h4>
+                        <p>Geliştirdiğim projeler için sürekli destek ve bakım hizmetleri sunarak güncel kalmalarını sağlıyorum.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Skills Section -->
+        <section id="skills">
+            <div class="container">
+                <h2 class="reveal">Teknik Yetkinliklerim</h2>
+                <div class="skills-grid">
+                    <!-- Panel stilini kullanıyorlar -->
+                    <div class="skill-item panel reveal"><i class="fab fa-react"></i><h4>React & Next.js</h4></div>
+                    <div class="skill-item panel reveal reveal-delay-1"><i class="fab fa-vuejs"></i><h4>Vue.js & Nuxt.js</h4></div>
+                    <div class="skill-item panel reveal reveal-delay-2"><i class="fab fa-js-square"></i><h4>JavaScript (ESNext)</h4></div>
+                    <div class="skill-item panel reveal reveal-delay-3"><i class="fab fa-node-js"></i><h4>Node.js (ExpressJS)</h4></div>
+                    <div class="skill-item panel reveal reveal-delay-4"><i class="fab fa-python"></i><h4>Python (Django/Flask)</h4></div>
+                    <div class="skill-item panel reveal reveal-delay-5"><i class="fas fa-database"></i><h4>SQL & NoSQL DBs</h4></div>
+                    <div class="skill-item panel reveal reveal-delay-1"><i class="fab fa-sass"></i><h4>CSS3/Tailwind</h4></div>
+                    <div class="skill-item panel reveal reveal-delay-2"><i class="fab fa-git-alt"></i><h4>Git & Versiyon Kontrol</h4></div>
+                    <div class="skill-item panel reveal reveal-delay-3"><i class="fab fa-docker"></i><h4>Docker & Konteyner</h4></div>
+                    <div class="skill-item panel reveal reveal-delay-4"><i class="fas fa-cloud"></i><h4>Bulut Platformları (AWS/Vercel)</h4></div>
+                    <div class="skill-item panel reveal reveal-delay-5"><i class="fas fa-vial"></i><h4>Test Otomasyonu</h4></div>
+                    <div class="skill-item panel reveal"><i class="fas fa-universal-access"></i><h4>Erişilebilirlik (A11y)</h4></div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Experience Section -->
+        <section id="experience">
+            <div class="container">
+                <h2 class="reveal">Profesyonel Deneyim</h2>
+                <div class="timeline">
+                    <!-- Timeline Item 1 -->
+                    <div class="timeline-item left reveal">
+                        <div class="timeline-content panel">
+                            <span class="timeline-date">Ocak 2023 - Günümüz</span>
+                            <h4>[Güncel Pozisyon, örn: Senior Frontend Engineer]</h4>
+                            <span class="timeline-company">[Şirket Adı, Şehir/Remote]</span>
+                            <p>Liderlik rolünde, [proje adı] projesinin frontend mimarisini tasarladım ve ekibe mentorluk yaptım. Kullanıcı etkileşimini %25 artıran yeni özellikler geliştirdim.</p>
+                        </div>
+                    </div>
+                    <!-- Timeline Item 2 -->
+                    <div class="timeline-item right reveal reveal-delay-1">
+                        <div class="timeline-content panel">
+                             <span class="timeline-date">Mart 2021 - Aralık 2022</span>
+                             <h4>[Önceki Pozisyon, örn: Full Stack Developer]</h4>
+                             <span class="timeline-company">[Önceki Şirket]</span>
+                            <p>Hem backend (Node.js, PostgreSQL) hem de frontend (React) geliştirmeleri yaparak çeşitli müşteri projelerini hayata geçirdim. API entegrasyonları gerçekleştirdim.</p>
+                        </div>
+                    </div>
+                     <!-- Timeline Item 3 -->
+                    <div class="timeline-item left reveal reveal-delay-2">
+                        <div class="timeline-content panel">
+                             <span class="timeline-date">Haziran 2019 - Şubat 2021</span>
+                             <h4>[İlk Pozisyon/Staj, örn: Junior Web Developer]</h4>
+                             <span class="timeline-company">[Başlangıç Şirketi]</span>
+                             <p>Temel web teknolojileri (HTML, CSS, JS) ve [bir framework, örn: jQuery/Bootstrap] kullanarak web siteleri geliştirdim ve bakımını yaptım. Takım çalışmasını öğrendim.</p>
+                        </div>
+                    </div>
+                    <!-- Daha fazla ekleyebilirsiniz -->
+                </div>
+            </div>
+        </section>
+
+        <!-- Projects Section -->
+        <section id="projects">
+            <div class="container">
+                <h2 class="reveal">Öne Çıkan Çalışmalarım</h2>
+                <div class="projects-grid">
+                    <!-- Proje Kartları Panel stilini kullanıyor -->
+                    <div class="project-card panel reveal">
+                        <div class="img-container"><img src="img2.png" alt="Proje A"></div>
+                        <div class="project-card-content">
+                            <div> <!-- İçerik gruplaması -->
+                                <h3>[Proje Adı  - Görev Yönetimi Uygulaması]</h3>
+                                <p>Gerçek zamanlı işbirliği özellikleri sunan, modern bir proje yönetim aracı. Sürükle-bırak arayüzü ve bildirim sistemi içerir.</p>
+                                <div class="project-tags"><span>React</span> <span>WebSockets</span> <span>Node.js</span> <span>MongoDB</span></div>
+                            </div>
+                            <div class="project-links">
+                                <a href="https://adiloguz.github.io/TOdo/" target="_blank" class="btn btn-sm"><i class="fas fa-external-link-alt"></i> Projeye git</a>
+                                <a href="" target="_blank" class="btn btn-secondary btn-sm"><i class="fab fa-github"></i> Kaynak Kod</a>
+                            </div>
+                        </div>
+                    </div>
+                     <div class="project-card panel reveal reveal-delay-1">
+                        <div class="img-container"><img src="img3.png" alt="Proje B"></div>
+                        <div class="project-card-content">
+                            <div>
+                                <h3>[Proje Adı - Vikipedi Arayüzü]</h3>
+                                <p>Mobil uyumlu, Wikipedia api kullanan neon renk ve ışıklandırmaya sahip bir web sitesi. Sesli arama , Görseller ve metin özeti gibi özelliklere sahip</p>
+                                <div class="project-tags"><span>Next.js</span> <span>TailwindCSS</span> <span>Strapi CMS</span> <span>GraphQL</span></div>
+                            </div>
+                            <div class="project-links">
+                                <a href="https://adiloguz.github.io/Vikipedi0/" target="_blank" class="btn btn-sm"><i class="fas fa-external-link-alt"></i> Projeye git</a>
+                                 <a href="#" target="_blank" class="btn btn-secondary btn-sm"><i class="fab fa-github"></i> Kaynak Kod</a> 
+                                 
+                            </div>
+                        </div>
+                    </div>
+                     <div class="project-card panel reveal reveal-delay-2">
+                        <div class="img-container"><img src="img4.jpg" alt="Proje C"></div>
+                        <div class="project-card-content">
+                            <div>
+                                <h3>[Proje Adı  - Balon Patlatma Oyunu]</h3>
+                                <p>Basit ve eğlenceli bir oyun Progressive Web App (PWA).</p>
+                                <div class="project-tags"><span>Vue.js</span> <span>PWA</span> <span>LocalStorage</span> <span>Firebase Auth</span></div>
+                            </div>
+                            <div class="project-links">
+                                 <a href="https://adiloguz.github.io/Balon-patlat/" target="_blank" class="btn btn-sm"><i class="fas fa-external-link-alt"></i> Projeye Git</a> 
+                                <a href="#" target="_blank" class="btn btn-secondary btn-sm"><i class="fab fa-github"></i> Kaynak Kod</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                 <style>.btn-sm { padding: 8px 18px; font-size: 0.8rem; }</style> <!-- Proje butonları için ek stil -->
+            </div>
+        </section>
+
+        <!-- Testimonials Section (YENİ) -->
+        <section id="testimonials">
+            <div class="container">
+                <h2 class="reveal">Müşteri & İş Ortağı Yorumları</h2>
+                <div class="testimonial-grid">
+                    <div class="testimonial-item panel reveal">
+                        <blockquote>"[Adil], projemize getirdiği yaratıcı çözümler ve teknik uzmanlığıyla beklentilerimizin ötesine geçti. İletişimi harika ve her zaman çözüm odaklı."</blockquote>
+                        <div class="testimonial-author">
+                            <cite>[Müşteri/İş Ortağı Mert Yılmaz]</cite>
+                            <span>[Front-End Developer, B Şirketi]</span>
+                        </div>
+                    </div>
+                    <div class="testimonial-item panel reveal reveal-delay-1">
+                        <blockquote>"Çalıştığım en profesyonel ve yetenekli geliştiricilerden biri. Projeyi zamanında ve yüksek kalitede teslim etti. Kesinlikle tekrar çalışmak isterim."</blockquote>
+                        <div class="testimonial-author">
+                             <cite>[Müşteri/ Ahmet Çelik]</cite>
+                             <span>[QA Mühendisi, A Şirketi]</span>
+                        </div>
+                    </div>
+                     <div class="testimonial-item panel reveal reveal-delay-2">
+                        <blockquote>"Teknik bilgisi kadar tasarım gözü de kuvvetli. Kullanıcı deneyimini iyileştirmek için harika önerilerde bulundu ve uyguladı."</blockquote>
+                        <div class="testimonial-author">
+                             <cite>[Berk Özdemir]</cite>
+                             <span>[Back-End Developer, C Şirketi]</span>
+                        </div>
+                    </div>
+                    <!-- Daha fazla referans eklenebilir -->
+                </div>
+            </div>
+        </section>
+
+         <!-- Call to Action Section (YENİ) -->
+         <section id="cta">
+             <div class="container reveal">
+                 <h2>Bir Sonraki Projenizi Birlikte Hayata Geçirelim mi?</h2>
+                 <p>Fikirlerinizi dijital gerçekliğe dönüştürmek için hazırım. İster yeni bir proje başlatmak, ister mevcut projenizi geliştirmek isteyin, size yardımcı olabilirim.</p>
+                 <a href="#contact" class="btn"><i class="fas fa-envelope"></i> Teklif Alın / İletişime Geçin</a>
+                 <!-- <a href="tel:+90XXXXXXXXXX" class="btn btn-secondary"><i class="fas fa-phone"></i> Hemen Arayın</a> -->
+             </div>
+         </section>
+
+        <!-- Contact Section -->
+        <section id="contact">
+            <div class="container">
+                <h2 class="reveal">İletişim // Bağlantıda Kalalım</h2>
+                <form id="contact-form" class="panel reveal reveal-delay-1" action="#" method="POST">
+                    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 20px;">
+                        <div class="form-group">
+                            <label for="name"><i class="fas fa-user"></i> Adınız Soyadınız:</label>
+                            <input type="text" id="name" name="name" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="email"><i class="fas fa-at"></i> E-posta Adresiniz:</label>
+                            <input type="email" id="email" name="email" required>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="subject"><i class="fas fa-info-circle"></i> Konu:</label>
+                        <input type="text" id="subject" name="subject" placeholder="Proje Teklifi, Soru, Merhaba...">
+                    </div>
+                    <div class="form-group">
+                        <label for="message"><i class="fas fa-comment-dots"></i> Mesajınız:</label>
+                        <textarea id="message" name="message" required></textarea>
+                    </div>
+                    <button type="submit" class="btn"><i class="fas fa-paper-plane"></i> Mesajı Güvenle Gönder</button>
+                </form>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer id="main-footer">
+        <div class="container footer-content">
+            <!-- <div class="footer-logo">[Adınız]<span>[Soyadınız]</span></div> -->
+             <div class="social-links">
+                <a href="[LinkedIn Profil Linkiniz]" target="_blank" aria-label="LinkedIn"><i class="fab fa-linkedin"></i></a>
+                <a href="[GitHub Profil Linkiniz]" target="_blank" aria-label="GitHub"><i class="fab fa-github"></i></a>
+                <a href="[Twitter Profil Linkiniz]" target="_blank" aria-label="Twitter"><i class="fab fa-twitter"></i></a>
+                <a href="[Codepen Profil Linkiniz]" target="_blank" aria-label="Codepen"><i class="fab fa-codepen"></i></a>
+                <a href="mailto:[Eposta Adresiniz]" aria-label="E-posta"><i class="fas fa-envelope"></i></a>
+            </div>
+            <p>© <span id="current-year"></span> Geliştirici, Adil Oğuz. Tüm hakları saklıdır.</p>
+            <!-- <p><a href="#privacy-policy">Gizlilik Politikası</a> | <a href="#terms">Kullanım Koşulları</a></p> -->
+        </div>
+    </footer>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+
+            const DOMElements = {
+                menuToggle: document.getElementById('mobile-menu'),
+                navLinks: document.getElementById('nav-links'),
+                mainHeader: document.getElementById('main-header'),
+                navLiAnchors: document.querySelectorAll('#nav-links li a'),
+                sections: document.querySelectorAll('main section'), // Sadece main içindekiler
+                revealElements: document.querySelectorAll('.reveal'),
+                currentYearSpan: document.getElementById('current-year'),
+                contactForm: document.getElementById('contact-form')
+            };
+
+            const state = {
+                lastScrollTop: 0,
+                headerHeight: DOMElements.mainHeader ? DOMElements.mainHeader.offsetHeight : 70,
+                isMobileMenuOpen: false
+            };
+
+            // --- Mobil Menü ---
+            function toggleMobileMenu() {
+                state.isMobileMenuOpen = !state.isMobileMenuOpen;
+                DOMElements.navLinks.classList.toggle('active', state.isMobileMenuOpen);
+                DOMElements.menuToggle.classList.toggle('active', state.isMobileMenuOpen);
+                DOMElements.menuToggle.setAttribute('aria-expanded', state.isMobileMenuOpen);
+            }
+
+            if (DOMElements.menuToggle && DOMElements.navLinks) {
+                DOMElements.menuToggle.addEventListener('click', toggleMobileMenu);
+
+                DOMElements.navLinks.querySelectorAll('a').forEach(link => {
+                    link.addEventListener('click', () => {
+                        if (state.isMobileMenuOpen) {
+                           toggleMobileMenu(); // Menüyü kapat
+                        }
+                    });
+                });
+            }
+
+            // --- Navbar Gizle/Gösterme ---
+            function handleScrollNavbar() {
+                let currentScroll = window.pageYOffset || document.documentElement.scrollTop;
+                if (currentScroll > state.lastScrollTop && currentScroll > state.headerHeight) {
+                    // Aşağı kaydırma
+                    DOMElements.mainHeader.classList.add('hidden');
+                } else {
+                     // Yukarı kaydırma veya en üstte
+                     DOMElements.mainHeader.classList.remove('hidden');
+                }
+                state.lastScrollTop = currentScroll <= 0 ? 0 : currentScroll;
+            }
+
+             // --- Aktif Link & ScrollSpy ---
+             function updateActiveNavLink() {
+                 let currentSectionId = 'hero'; // Default
+                 const scrollPosition = pageYOffset + state.headerHeight + 100; // Hedefe biraz daha erken ulaş
+
+                 DOMElements.sections.forEach(section => {
+                     if (scrollPosition >= section.offsetTop) {
+                         currentSectionId = section.getAttribute('id');
+                     }
+                 });
+
+                 DOMElements.navLiAnchors.forEach(a => {
+                     a.classList.remove('active');
+                     if (a.getAttribute('href').substring(1) === currentSectionId) {
+                         a.classList.add('active');
+                     }
+                 });
+             }
+
+            // --- Scroll Reveal Animasyonu (Intersection Observer) ---
+            function initScrollReveal() {
+                const observerOptions = { threshold: 0.1, rootMargin: "0px 0px -50px 0px" }; // Biraz daha erken tetikle
+                const revealObserver = new IntersectionObserver((entries, observer) => {
+                    entries.forEach(entry => {
+                        if (entry.isIntersecting) {
+                            // Gecikmeyi doğrudan stil üzerinden al (daha esnek)
+                            const delay = entry.target.style.transitionDelay || '0s';
+                             // Kısa bir süre sonra sınıfı ekle (gerçek gecikme için)
+                            setTimeout(() => {
+                                entry.target.classList.add('visible');
+                            }, parseFloat(delay) * 1000); // CSS'deki transition-delay ile senkronize et
+
+                            observer.unobserve(entry.target); // Tek seferlik animasyon
+                        }
+                    });
+                }, observerOptions);
+                DOMElements.revealElements.forEach(el => { revealObserver.observe(el); });
+            }
+
+            // --- Footer Yıl ---
+            function updateFooterYear() {
+                if (DOMElements.currentYearSpan) {
+                    DOMElements.currentYearSpan.textContent = new Date().getFullYear();
+                }
+            }
+
+            // --- Form Uyarısı ---
+            function handleFormSubmit(e) {
+                e.preventDefault();
+                // Gelişmiş: Burada fetch ile bir API'ye gönderme yapılabilir.
+                // Örnek: fetch(this.action, { method: 'POST', body: new FormData(this) }).then(...)
+                alert('Mesajınız başarıyla iletildi! (Demo)');
+                // DOMElements.contactForm.reset(); // Formu temizle
+            }
+            if (DOMElements.contactForm) {
+                DOMElements.contactForm.addEventListener('submit', handleFormSubmit);
+            }
+
+
+            // --- Event Listeners ---
+            window.addEventListener('scroll', () => {
+                handleScrollNavbar();
+                updateActiveNavLink();
+            });
+
+            // --- Initializations ---
+            updateFooterYear();
+            initScrollReveal();
+            updateActiveNavLink(); // İlk yüklemede doğru linki aktif et
+        });
+    </script>
+
+</body>
+</html>
